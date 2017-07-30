@@ -23,10 +23,13 @@ public class DemoDeclaration extends WebPage{
 
     @FindBy(id="lst-ib")
     public TextField searchField;
-    @FindBy(name = "btnG")
+    @FindBy(name = "btnK")
     public Button search;
     @Grid(xpath = "//div[@class='srg']/*[@class='g']", structure = SearchResultStructure.class, currentPageXpath = "//td[not(@class='b navend') and @class='cur']", pagerXpath = "//td[not(@class='b navend')]")
     public GridView searchResults;
+
+    @FindBy(className="logo-subtext")
+    public WebItem logoTxt;
 
     @Override
     protected void invokeActions() {
@@ -35,7 +38,8 @@ public class DemoDeclaration extends WebPage{
 
     @Step("Search for {0} in google")
     public void search(String searchPattern){
-        this.searchField.sendKeys(searchPattern);
+        this.searchField.clearAndSendKeys(searchPattern);
+        this.logoTxt.click();
         this.search.click();
     }
 
